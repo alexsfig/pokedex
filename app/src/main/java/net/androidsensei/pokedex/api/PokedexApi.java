@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import net.androidsensei.pokedex.PokedexApplication;
 import net.androidsensei.pokedex.model.Pokemon;
 import net.androidsensei.pokedex.model.PokemonAdapter;
+import net.androidsensei.pokedex.model.PokemonList;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,10 +24,8 @@ public class PokedexApi {
     private ProgressBar progressBarLoading;
     private ListView listView;
     public static void getPokemons( Response.Listener listener,  Response.ErrorListener errorListener){
-         GsonRequest<Pokemon[]> getPersons =
-                new GsonRequest<Pokemon[]>(MI_POKEDEX_URL+"/pokemons", Pokemon[].class,
-
-                       listener, errorListener);
+         GsonRequest<PokemonList> getPersons =
+                new GsonRequest<PokemonList>(MI_POKEDEX_URL+"/pokemons", PokemonList.class, listener, errorListener);
         PokedexApplication.getInstance().addToRequestQueue(getPersons);
     }
 }
