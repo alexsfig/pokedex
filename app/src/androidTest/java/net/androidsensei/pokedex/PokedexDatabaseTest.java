@@ -4,10 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
-import net.androidsensei.pokedex.data.PokedexContract;
+
 import net.androidsensei.pokedex.data.PokedexDbHelper;
 import net.androidsensei.pokedex.data.PokedexContract.PokemonEntry;
-import net.androidsensei.pokedex.data.PokedexContract.LugarEntry;
 
 public class PokedexDatabaseTest extends AndroidTestCase {
 
@@ -31,11 +30,11 @@ public class PokedexDatabaseTest extends AndroidTestCase {
 
         ContentValues values = new ContentValues();
         values.put(PokemonEntry._ID, id);
-        values.put(PokemonEntry.COLUMN_NOMBRE, nombre);
+        values.put(PokemonEntry.COLUMN_NAME, nombre);
         values.put(PokemonEntry.COLUMN_AVATAR, avatar);
-        values.put(PokemonEntry.COLUMN_NUMERO, numero);
-        values.put(PokemonEntry.COLUMN_ALTURA, altura);
-        values.put(PokemonEntry.COLUMN_PESO, peso);
+        values.put(PokemonEntry.COLUMN_UUID, numero);
+        values.put(PokemonEntry.COLUMN_HEIGHT, altura);
+        values.put(PokemonEntry.COLUMN_WEIGHT, peso);
 
         PokedexDbHelper dbHelper = new PokedexDbHelper(mContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -47,11 +46,11 @@ public class PokedexDatabaseTest extends AndroidTestCase {
 
         String[] columns = {
                 PokemonEntry._ID,
-                PokemonEntry.COLUMN_NOMBRE,
+                PokemonEntry.COLUMN_NAME,
                 PokemonEntry.COLUMN_AVATAR,
-                PokemonEntry.COLUMN_NUMERO,
-                PokemonEntry.COLUMN_ALTURA,
-                PokemonEntry.COLUMN_PESO,
+                PokemonEntry.COLUMN_UUID,
+                PokemonEntry.COLUMN_HEIGHT,
+                PokemonEntry.COLUMN_WEIGHT,
         };
 
         Cursor cursor = db.query(
@@ -65,7 +64,7 @@ public class PokedexDatabaseTest extends AndroidTestCase {
         );
 
         if (cursor.moveToFirst()) {
-            int nombreIndex = cursor.getColumnIndex(PokemonEntry.COLUMN_NOMBRE);
+            int nombreIndex = cursor.getColumnIndex(PokemonEntry.COLUMN_NAME);
             String nombrePokemon = cursor.getString(nombreIndex);
 
             assertEquals(nombre, nombrePokemon);
